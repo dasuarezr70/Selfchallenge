@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ranking — Self Challenge</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand">🎯 Self<span class="dot">Challenge</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="challenges.html">Retos</a>
+      <a href="rewards.html">Recompensas</a>
+      <a href="ranking.html">Ranking</a>
+      <a href="profile.html">Perfil</a>
+      <a href="settings.html">Ajustes</a>
+    </div>
+    <div class="nav-user">
+      <span data-nav-name></span>
+      <div class="nav-avatar" data-nav-avatar></div>
+    </div>
+    <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+  </div>
+</nav>
+
+<header class="page-header container">
+  <h1 class="reveal">Ranking global 📊</h1>
+  <p>Compara tu progreso con el resto de la comunidad.</p>
+</header>
+
+<section class="container" data-ranking-list style="padding-bottom:40px;"></section>
+
+<footer class="footer">
+  <div class="container">
+    <span>© 2026 Self Challenge. Todos los derechos reservados.</span>
+    <div class="footer-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="challenges.html">Retos</a>
+      <a href="rewards.html">Recompensas</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const state = SC.load();
+    const me = { name: state.name, avatar: state.avatar, level: state.level, xp: state.xp, isMe: true };
+    const all = [...SC.FICTIONAL_RANKING, me].sort((a, b) => b.xp - a.xp);
+
+    const wrap = document.querySelector('[data-ranking-list]');
+    wrap.innerHTML = '';
+    all.forEach((p, i) => {
+      const pos = i + 1;
+      const row = document.createElement('div');
+      row.className = `ranking-row reveal reveal-${Math.min(i + 1, 5)}` + (p.isMe ? ' me' : '') + (pos <= 3 ? ` top${pos}` : '');
+      row.innerHTML = `
+        <span class="rank-pos">#${pos}</span>
+        <span class="rank-avatar">${p.avatar}</span>
+        <span class="rank-name">${p.name}${p.isMe ? ' (Tú)' : ''}</span>
+        <span class="pill pill-secondary">Nv. ${p.level}</span>
+        <span class="pill pill-success">${p.xp} XP</span>
+      `;
+      wrap.appendChild(row);
+    });
+  });
+</script>
+</body>
+</html>

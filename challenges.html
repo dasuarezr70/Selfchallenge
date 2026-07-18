@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retos — Self Challenge</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand">🎯 Self<span class="dot">Challenge</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="challenges.html">Retos</a>
+      <a href="rewards.html">Recompensas</a>
+      <a href="ranking.html">Ranking</a>
+      <a href="profile.html">Perfil</a>
+      <a href="settings.html">Ajustes</a>
+    </div>
+    <div class="nav-user">
+      <span data-nav-name></span>
+      <div class="nav-avatar" data-nav-avatar></div>
+    </div>
+    <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+  </div>
+</nav>
+
+<header class="page-header container">
+  <h1 class="reveal">Retos diarios 🎯</h1>
+  <p>Elige una categoría y completa retos para ganar experiencia.</p>
+</header>
+
+<section class="container">
+  <div class="category-tabs" data-category-tabs></div>
+  <div class="challenges-grid" data-challenges-grid></div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <span>© 2026 Self Challenge. Todos los derechos reservados.</span>
+    <div class="footer-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="rewards.html">Recompensas</a>
+      <a href="ranking.html">Ranking</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/app.js"></script>
+<script src="js/challenges.js"></script>
+</body>
+</html>

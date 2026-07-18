@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recompensas — Self Challenge</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand">🎯 Self<span class="dot">Challenge</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="challenges.html">Retos</a>
+      <a href="rewards.html">Recompensas</a>
+      <a href="ranking.html">Ranking</a>
+      <a href="profile.html">Perfil</a>
+      <a href="settings.html">Ajustes</a>
+    </div>
+    <div class="nav-user">
+      <span data-nav-name></span>
+      <div class="nav-avatar" data-nav-avatar></div>
+    </div>
+    <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+  </div>
+</nav>
+
+<header class="page-header container">
+  <h1 class="reveal">Tu colección de recompensas 🏆</h1>
+  <p>Insignias, medallas y trofeos que has desbloqueado en tu camino.</p>
+</header>
+
+<section class="container">
+  <div class="rewards-grid" data-rewards-grid></div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <span>© 2026 Self Challenge. Todos los derechos reservados.</span>
+    <div class="footer-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="challenges.html">Retos</a>
+      <a href="ranking.html">Ranking</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const state = SC.load();
+    const grid = document.querySelector('[data-rewards-grid]');
+    grid.innerHTML = '';
+    SC.BADGE_CATALOG.forEach((b, i) => {
+      const unlocked = state.badges.includes(b.id);
+      const el = document.createElement('div');
+      el.className = `card reward-badge reveal reveal-${(i % 5) + 1}` + (unlocked ? '' : ' locked');
+      el.innerHTML = `
+        <div class="badge-icon">${b.icon}</div>
+        <h4>${b.name}</h4>
+        <p>${b.description}</p>
+        <span class="pill ${unlocked ? 'pill-success' : ''}" style="margin-top:10px;">${unlocked ? 'Desbloqueada' : 'Bloqueada'}</span>
+      `;
+      grid.appendChild(el);
+    });
+  });
+</script>
+</body>
+</html>

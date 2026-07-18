@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ajustes — Self Challenge</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand">🎯 Self<span class="dot">Challenge</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="challenges.html">Retos</a>
+      <a href="rewards.html">Recompensas</a>
+      <a href="ranking.html">Ranking</a>
+      <a href="profile.html">Perfil</a>
+      <a href="settings.html">Ajustes</a>
+    </div>
+    <div class="nav-user">
+      <span data-nav-name></span>
+      <div class="nav-avatar" data-nav-avatar></div>
+    </div>
+    <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+  </div>
+</nav>
+
+<header class="page-header container">
+  <h1 class="reveal">Ajustes ⚙️</h1>
+  <p>Personaliza tu experiencia en Self Challenge.</p>
+</header>
+
+<section class="container" style="max-width: 720px; padding-bottom: 60px;">
+  <div class="card reveal reveal-1">
+    <div class="section-title"><h2>Perfil</h2></div>
+
+    <label for="nameInput" style="font-size:0.85rem; font-weight:600;">Nombre</label>
+    <input id="nameInput" class="text-input" type="text" maxlength="24" style="margin: 8px 0 20px;">
+
+    <label style="font-size:0.85rem; font-weight:600;">Avatar</label>
+    <div class="avatar-picker" data-avatar-picker></div>
+  </div>
+
+  <div class="card reveal reveal-2" style="margin-top:24px;">
+    <div class="section-title"><h2>Preferencias</h2></div>
+    <div class="settings-row">
+      <div>
+        <h4>Modo oscuro</h4>
+        <p>Cambia la apariencia de toda la aplicación.</p>
+      </div>
+      <button class="switch" data-dark-switch></button>
+    </div>
+  </div>
+
+  <div class="card reveal reveal-3" style="margin-top:24px; border-color:#ffd7d7;">
+    <div class="section-title"><h2>Zona de peligro</h2></div>
+    <div class="settings-row" style="border:none;">
+      <div>
+        <h4>Restablecer progreso</h4>
+        <p>Elimina tu XP, nivel, insignias y retos completados. No se puede deshacer.</p>
+      </div>
+      <button class="btn btn-danger" data-reset-btn>Restablecer</button>
+    </div>
+  </div>
+
+  <div style="margin-top:24px; display:flex; justify-content:flex-end;">
+    <button class="btn btn-primary" data-save-btn>Guardar cambios</button>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <span>© 2026 Self Challenge. Todos los derechos reservados.</span>
+    <div class="footer-links"><a href="profile.html">Perfil</a></div>
+  </div>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/app.js"></script>
+<script>
+  const AVATARS = ['🧑', '👩', '👨', '🦊', '🐼', '🐯', '🦁', '🐨', '🐰', '🐸', '🦉', '🐺'];
+  let state = SC.load();
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('nameInput').value = state.name;
+
+    const picker = document.querySelector('[data-avatar-picker]');
+    AVATARS.forEach((a) => {
+      const btn = document.createElement('button');
+      btn.className = 'avatar-option' + (a === state.avatar ? ' selected' : '');
+      btn.textContent = a;
+      btn.addEventListener('click', () => {
+        state.avatar = a;
+        document.querySelectorAll('.avatar-option').forEach((el) => el.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+      picker.appendChild(btn);
+    });
+
+    const darkSwitch = document.querySelector('[data-dark-switch]');
+    darkSwitch.classList.toggle('on', !!state.darkMode);
+    darkSwitch.addEventListener('click', () => {
+      state.darkMode = !state.darkMode;
+      darkSwitch.classList.toggle('on', state.darkMode);
+      SC.applyDarkMode(state);
+      SC.save(state);
+    });
+
+    document.querySelector('[data-save-btn]').addEventListener('click', () => {
+      state.name = document.getElementById('nameInput').value.trim() || 'Jugador';
+      SC.save(state);
+      scToast('Cambios guardados', '', 'success');
+    });
+
+    document.querySelector('[data-reset-btn]').addEventListener('click', () => {
+      if (confirm('¿Seguro que quieres restablecer todo tu progreso? Esta acción no se puede deshacer.')) {
+        SC.resetProgress();
+        scToast('Progreso restablecido', '', 'info');
+        setTimeout(() => window.location.href = 'dashboard.html', 900);
+      }
+    });
+  });
+</script>
+</body>
+</html>

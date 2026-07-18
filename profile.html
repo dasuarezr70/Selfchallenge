@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfil — Self Challenge</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand">🎯 Self<span class="dot">Challenge</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="challenges.html">Retos</a>
+      <a href="rewards.html">Recompensas</a>
+      <a href="ranking.html">Ranking</a>
+      <a href="profile.html">Perfil</a>
+      <a href="settings.html">Ajustes</a>
+    </div>
+    <div class="nav-user">
+      <span data-nav-name></span>
+      <div class="nav-avatar" data-nav-avatar></div>
+    </div>
+    <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+  </div>
+</nav>
+
+<section class="container" style="padding-top:40px;">
+  <div class="card profile-hero reveal">
+    <div class="profile-avatar-lg" data-profile-avatar></div>
+    <div>
+      <h2 data-profile-name style="margin-bottom:4px;">Jugador</h2>
+      <p data-profile-level style="margin:0;">Nivel 1 — Beginner</p>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="card stat-card reveal reveal-1">
+      <div class="stat-icon">⭐</div>
+      <div><div class="stat-value" data-profile-xp>0</div><div class="stat-label">XP total</div></div>
+    </div>
+    <div class="card stat-card reveal reveal-2">
+      <div class="stat-icon">✅</div>
+      <div><div class="stat-value" data-profile-completed>0</div><div class="stat-label">Retos completados</div></div>
+    </div>
+    <div class="card stat-card reveal reveal-3">
+      <div class="stat-icon">🔥</div>
+      <div><div class="stat-value" data-profile-maxstreak>0</div><div class="stat-label">Racha máxima</div></div>
+    </div>
+    <div class="card stat-card reveal reveal-4">
+      <div class="stat-icon">🏅</div>
+      <div><div class="stat-value" data-profile-badges>0</div><div class="stat-label">Insignias</div></div>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="card reveal reveal-1">
+      <div class="section-title"><h2>Estadísticas por categoría</h2></div>
+      <div data-category-stats></div>
+    </div>
+    <div class="card reveal reveal-2">
+      <div class="section-title"><h2>Insignias</h2></div>
+      <div class="rewards-grid" style="grid-template-columns:repeat(2,1fr); gap:12px;" data-profile-badge-grid></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <span>© 2026 Self Challenge. Todos los derechos reservados.</span>
+    <div class="footer-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="settings.html">Ajustes</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/app.js"></script>
+<script src="js/profile.js"></script>
+</body>
+</html>

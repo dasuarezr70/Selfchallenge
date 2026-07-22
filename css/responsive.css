@@ -1,0 +1,44 @@
+/* =========================================================
+   responsive.css — breakpoints for tablet & mobile
+   ========================================================= */
+
+@media (max-width: 960px) {
+  .stats-grid, .stats-row { grid-template-columns: repeat(2, 1fr) !important; }
+  .dashboard-grid { grid-template-columns: 1fr !important; }
+  .hero-grid { grid-template-columns: 1fr !important; text-align: center; }
+  .hero-visual { order: -1; margin-bottom: 24px; }
+  .hero-actions { justify-content: center; }
+  .benefits-grid, .testimonial-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav-links.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    padding: 12px;
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+    z-index: 99;
+  }
+  .nav-links.mobile-open a { padding: 14px 16px; }
+
+  .challenges-grid,
+  .rewards-grid,
+  .benefits-grid,
+  .testimonial-grid { grid-template-columns: 1fr !important; }
+
+  .section { padding: 48px 0 !important; }
+}
+
+@media (max-width: 520px) {
+  .stats-grid, .stats-row { grid-template-columns: repeat(2, 1fr) !important; }
+  .container { padding: 0 16px; }
+  .footer .container { flex-direction: column; align-items: flex-start; }
+}
